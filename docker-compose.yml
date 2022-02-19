@@ -12,12 +12,9 @@ services:
       dockerfile: src/Api/Dockerfile
     ports:
       - "5000:5000"
-      - "5001:5001"
     environment: 
         ASPNETCORE_ENVIRONMENT: Release
         MESSAGE_CONNECTIONSTRING: ${MESSAGE_CONNECTIONSTRING}
-        ASPNETCORE_Kestrel__Certificates__Default__Password: ${CRT_PASS}
-        ASPNETCORE_Kestrel__Certificates__Default__Path: /https/messages-api.pfx
     volumes: 
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.aspnet/https:/https:ro
