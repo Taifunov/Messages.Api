@@ -1,7 +1,7 @@
 version: '3.9'
 
 x-restart-policy: &restart_policy
-  restart: on-failure
+  restart: unless-stopped
 
 services:
   messages-api:
