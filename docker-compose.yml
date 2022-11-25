@@ -11,7 +11,7 @@ services:
       context: .
       dockerfile: src/Api/Dockerfile
     ports:
-      - "8001:8001"
+      - "8000:80"
     environment: 
         ASPNETCORE_ENVIRONMENT: Release
         MESSAGE_CONNECTIONSTRING: ${MESSAGE_CONNECTIONSTRING}
