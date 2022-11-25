@@ -1,7 +1,7 @@
 version: '3.9'
 
 x-restart-policy: &restart_policy
-  restart: unless-stopped
+  restart: always
 
 services:
   messages-api:
@@ -11,7 +11,7 @@ services:
       context: .
       dockerfile: src/Api/Dockerfile
     ports:
-      - "5000:5000"
+      - "8000:8000"
     environment: 
         ASPNETCORE_ENVIRONMENT: Release
         MESSAGE_CONNECTIONSTRING: ${MESSAGE_CONNECTIONSTRING}
