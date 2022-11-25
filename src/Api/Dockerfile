@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 ENV ASPNETCORE_URLS=http://+:8000
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 8000
 # EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
