@@ -3,7 +3,6 @@ using Context;
 
 public static class InstallerExtensions
 {
-    private static readonly string? ConnectionString = Environment.GetEnvironmentVariable("MESSAGE_CONNECTIONSTRING");
     private const LogLevel LoggerLevel = LogLevel.Information;
 
     public static void InstallServicesInAssembly(this IServiceCollection services)
@@ -15,10 +14,10 @@ public static class InstallerExtensions
         installers.ForEach(installer => installer.InstallServices(services));
     }
 
-    public static IServiceCollection AddPersistence(this IServiceCollection services)
+    public static IServiceCollection AddPersistence(this IServiceCollection services, string connectionString)
     {
         services.AddDbContext<MessageContext>(options =>
-            options.UseNpgsql(ConnectionString ?? throw new ArgumentException($"{nameof(ConnectionString)} is not configured"), o => SetupNpgSqlDbOpts(o))
+            options.UseNpgsql(connectionString ?? throw new ArgumentException($"{nameof(connectionString)} is not configured"), o => SetupNpgSqlDbOpts(o))
                             .EnableSensitiveDataLogging()
                             .UseLoggerFactory(MyLoggerFactory));
         return services;

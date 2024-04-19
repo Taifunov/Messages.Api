@@ -5,7 +5,8 @@ using Messages.Api.Installers;
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
-services.AddPersistence();
+var conStr = builder.Configuration.GetConnectionString("MESSAGE_CONNECTIONSTRING");
+services.AddPersistence(conStr);
 services.InstallServicesInAssembly();
 
 var app = builder.Build();
@@ -26,6 +27,7 @@ void Configure(WebApplication app)
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<MessageContext>();
+    app.UseHttpsRedirection();
 
     if (app.Environment.IsDevelopment())
     {
@@ -49,6 +51,4 @@ void Configure(WebApplication app)
             throw;
         }
     }
-
-    app.UseHttpsRedirection();
 }

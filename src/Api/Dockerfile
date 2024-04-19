@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy AS base
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy AS build
 WORKDIR /src
 COPY ["src/Api/Messages.Api.csproj", "src/Api/"]
 RUN dotnet restore "src/Api/Messages.Api.csproj"
