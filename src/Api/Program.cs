@@ -30,7 +30,6 @@ void Configure(WebApplication app)
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<MessageContext>();
-    app.UseHttpsRedirection();
 
     if (app.Environment.IsDevelopment())
     {
@@ -54,6 +53,9 @@ void Configure(WebApplication app)
             throw;
         }
     }
+    app.UseRouting();
+    app.UseCors();
+    app.UseHttpsRedirection();
 }
 
 IConfiguration LoadConfiguration()
@@ -61,6 +63,7 @@ IConfiguration LoadConfiguration()
     var environment = Environment.GetEnvironmentVariable("ENVIRONMENT") ?? "Development";
     var builder = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile($"appsettings.json", true, true)
         .AddJsonFile($"appsettings.{environment}.json", true, true)
         .AddEnvironmentVariables();
 
