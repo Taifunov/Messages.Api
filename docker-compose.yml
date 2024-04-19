@@ -12,7 +12,8 @@ services:
       - "8000:80"
     environment: 
         ASPNETCORE_ENVIRONMENT: Release
-        MESSAGE_CONNECTIONSTRING: ${MESSAGE_CONNECTIONSTRING}
+    env_file: .env
     volumes: 
+      - /var/logs/messages-api:/var/logs/messages-bot
       - /var/run/docker.sock:/var/run/docker.sock
       - ~/.aspnet/https:/https:ro
