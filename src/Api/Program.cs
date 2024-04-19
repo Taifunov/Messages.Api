@@ -5,7 +5,10 @@ using Messages.Api.Installers;
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
-var conStr = builder.Configuration.GetConnectionString("MESSAGE_CONNECTIONSTRING");
+var configuration = builder.Configuration;
+configuration.AddConfiguration(LoadConfiguration());
+
+var conStr = builder.Configuration["MESSAGE_CONNECTIONSTRING"];
 services.AddPersistence(conStr);
 services.InstallServicesInAssembly();
 
@@ -51,4 +54,15 @@ void Configure(WebApplication app)
             throw;
         }
     }
+}
+
+IConfiguration LoadConfiguration()
+{
+    var environment = Environment.GetEnvironmentVariable("ENVIRONMENT") ?? "Development";
+    var builder = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile($"appsettings.{environment}.json", false, true)
+        .AddEnvironmentVariables();
+
+    return builder.Build();
 }
