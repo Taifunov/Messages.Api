@@ -61,7 +61,7 @@ IConfiguration LoadConfiguration()
     var environment = Environment.GetEnvironmentVariable("ENVIRONMENT") ?? "Development";
     var builder = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile($"appsettings.{environment}.json", false, true)
+        .AddJsonFile($"appsettings.{environment}.json", true, true)
         .AddEnvironmentVariables();
 
     return builder.Build();

@@ -11,7 +11,7 @@ services:
     ports:
       - "8000:80"
     environment: 
-        ASPNETCORE_ENVIRONMENT: Release
+        ENVIRONMENT: Release
     env_file: .env
     volumes: 
       - /var/logs/messages-api:/var/logs/messages-bot
