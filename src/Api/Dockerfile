@@ -1,6 +1,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy AS base
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+ENV ASPNETCORE_URLS=http://+:8000
 WORKDIR /app
+EXPOSE 8000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy AS build
 WORKDIR /src
