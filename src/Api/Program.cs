@@ -54,7 +54,6 @@ void Configure(WebApplication app)
         }
     }
     app.UseRouting();
-    app.UseCors();
     app.UseHttpsRedirection();
 }
 
